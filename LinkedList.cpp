@@ -43,7 +43,19 @@ void InsertNodeFirst(node* &head, node* &tail, int d)
     }
 }
 
-void printLL(node *temp)        //temp pointer
+void InsertNodeMid(node* &head, node* &tail, int pos, int d)
+{
+    node *temp=head;
+    for (int i=0;i<pos-1;i++)
+    {
+        temp=temp->next;
+    }
+    node *n=new node(d);
+    n->next=temp->next;
+    temp->next=n;
+}
+
+void printLL(node *temp)        
 {
     while (temp!=NULL)
     {
@@ -52,6 +64,17 @@ void printLL(node *temp)        //temp pointer
     
     }
     cout<<"NULL"<<endl;
+}
+
+int lengthLL(node *head)
+{
+    int count=0;
+    while (head!=NULL)
+    {
+        count++;
+        head=head->next;
+    }
+    return count;
 }
 
 int main()
@@ -67,6 +90,12 @@ int main()
     InsertNodeFirst(head,tail,7);
 
     printLL(head);
+
+    InsertNodeMid(head,tail,3,17);
+
+    printLL(head);
+
+    cout<<"Length of the LinkedList is "<<lengthLL(head)<<endl;
 
     return 0;
 }
