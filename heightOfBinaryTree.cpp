@@ -5,7 +5,7 @@ class node
 {
     public:
     int data;
-    node *right, *left;
+    node *left, *right;
 
     node(int d)
     {
@@ -34,9 +34,9 @@ void preOrder(node *root)
     if (!root) return;
     else
     {
-    cout<<root->data<<" ";
-    preOrder(root->left);
-    preOrder(root->right);
+        cout<<root->data<<" ";
+        preOrder(root->left);
+        preOrder(root->right);
     }
 }
 
@@ -56,27 +56,49 @@ void postOrder(node *root)
     if (!root) return;
     else
     {
-        postOrder(root->left);
-        postOrder(root->right);
+        preOrder(root->left);
+        preOrder(root->right);
         cout<<root->data<<" ";
     }
+}
+
+int height(node *root)
+{
+    if (!root) return 0;
+    else
+    {
+        int left=height(root->left);
+        int right=height(root->right);
+        return max(left,right) + 1;
+    }
+}
+
+int count(node *root)
+{
+    if (!root) return 0;
+    
+    return count(root->left) + count(root->right) + 1;
 }
 
 int main()
 {
     node *root=buildTree();
 
-    cout<<"preorder of the tree is:";
+    cout<<"PREORDER of the tree is:";
     preOrder(root);
     cout<<endl;
 
-    cout<<"inorder of the tree is:";
+    cout<<"INORDER of the tree is:";
     inOrder(root);
     cout<<endl;
 
-    cout<<"postorder of the tree is:";
+    cout<<"POSTORDER of the tree is:";
     postOrder(root);
     cout<<endl;
+
+    cout<<"HEIGHT of the tree is:"<<height(root)<<endl;
+
+    cout<<"NODES:"<<count(root)<<endl;
 
     return 0;
 }
