@@ -47,3 +47,6 @@ int main()
 
     return 0;
 }
+
+// we are using min heap cause we have to remove smallest element and print the largest k elements
+
